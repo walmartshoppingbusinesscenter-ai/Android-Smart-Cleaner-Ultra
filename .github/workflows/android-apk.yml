@@ -26,7 +26,35 @@ jobs:
         run: |
           unzip -o AndroidSmartCleanerPro-MVP.zip -d extracted
           test -f extracted/AndroidSmartCleanerPro/settings.gradle.kts
-
+      
+      - name: Fix Persian XML resources
+        run: |
+          cat > extracted/AndroidSmartCleanerPro/app/src/main/res/values-fa/strings.xml <<'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">پاک‌ساز هوشمند پرو</string>
+              <string name="app_title">پاک‌ساز هوشمند پرو</string>
+              <string name="subtitle">گوشی شما، مرتب‌تر و ساده‌تر</string>
+              <string name="storage_title">نمای کلی حافظه</string>
+              <string name="used">استفاده‌شده</string>
+              <string name="free">در دسترس</string>
+              <string name="total">کل</string>
+              <string name="quick_actions">دسترسی سریع</string>
+              <string name="large_files">فایل‌های حجیم</string>
+              <string name="duplicates">فایل‌های تکراری</string>
+              <string name="device_info">اطلاعات دستگاه</string>
+              <string name="settings">ظاهر و زبان</string>
+              <string name="dark_mode">حالت تیره</string>
+              <string name="language">زبان</string>
+              <string name="english">English</string>
+              <string name="persian">فارسی</string>
+              <string name="scan">بررسی حافظه</string>
+              <string name="scan_note">اسکن فایل‌ها در مرحله بعد اضافه می‌شود. این نسخه هیچ فایلی را حذف نمی‌کند.</string>
+              <string name="storage_note">مقادیر حافظه توسط اندروید ارائه می‌شوند و ممکن است فضای رزروشده سیستم را نیز شامل شوند.</string>
+              <string name="gb">گیگابایت</string>
+          </resources>
+          EOF
+          
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:

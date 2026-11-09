@@ -55,6 +55,32 @@ jobs:
           </resources>
           EOF
           
+          cat > extracted/AndroidSmartCleanerPro/app/src/main/res/values/strings.xml <<'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">Smart Cleaner Pro</string>
+              <string name="app_title">Smart Cleaner Pro</string>
+              <string name="subtitle">Your device, cleaner and simpler</string>
+              <string name="storage_title">Storage overview</string>
+              <string name="used">Used</string>
+              <string name="free">Available</string>
+              <string name="total">Total</string>
+              <string name="quick_actions">Quick actions</string>
+              <string name="large_files">Large files</string>
+              <string name="duplicates">Duplicate files</string>
+              <string name="device_info">Device information</string>
+              <string name="settings">Appearance &amp; language</string>
+              <string name="dark_mode">Dark theme</string>
+              <string name="language">Language</string>
+              <string name="english">English</string>
+              <string name="persian">فارسی</string>
+              <string name="scan">Scan storage</string>
+              <string name="scan_note">File scanning will be added in the next milestone. No files are deleted by this version.</string>
+              <string name="storage_note">Storage values are provided by Android and may include system-reserved space.</string>
+              <string name="gb">GB</string>
+          </resources>
+          EOF
+          
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:

@@ -26,7 +26,26 @@ jobs:
         run: |
           unzip -o AndroidSmartCleanerPro-MVP.zip -d extracted
           test -f extracted/AndroidSmartCleanerPro/settings.gradle.kts
-      
+    
+      - name: Fix Kotlin setContent import
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("extracted/AndroidSmartCleanerPro/app/src/main/java/com/smartcleanerpro/app/MainActivity.kt")
+          s = p.read_text(encoding="utf-8")
+          imp = "import androidx.activity.compose.setContent"
+
+          if imp not in s:
+              lines = s.splitlines()
+              i = next(i for i, line in enumerate(lines) if line.startswith("package "))
+              lines.insert(i + 1, "")
+              lines.insert(i + 2, imp)
+              p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+          print("setContent import checked.")
+          PY
+          
       - name: Fix Persian XML resources
         run: |
           cat > extracted/AndroidSmartCleanerPro/app/src/main/res/values-fa/strings.xml <<'EOF'
